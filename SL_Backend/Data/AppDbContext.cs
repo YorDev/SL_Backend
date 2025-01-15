@@ -5,7 +5,7 @@
 
     public class AppDbContext : DbContext
     {
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -18,9 +18,9 @@
 
             // Relación Customer -> Orders (1:N)
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.Customer)
+                .HasOne(o => o.User)
                 .WithMany(c => c.Orders)
-                .HasForeignKey(o => o.CustomerId)
+                .HasForeignKey(o => o.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Si se elimina un cliente, se eliminan sus órdenes.
 
             // Relación Order -> OrderItems (1:N)

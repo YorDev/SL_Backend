@@ -9,9 +9,9 @@
         public long Id { get; set; }
 
         [Required]
-        public long CustomerId { get; set; }
+        public long UserId { get; set; }
 
-        public Customer Customer { get; set; }
+        public User User { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;

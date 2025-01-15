@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class Customer
+    public class User
     {
         public long Id { get; set; }
 
@@ -14,9 +14,13 @@
         [EmailAddress]
         public string Email { get; set; }
 
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
-        public string Address { get; set; }
+        public string PasswordHash { get; set; }
+
+        public string Role { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Order> Orders { get; set; }
     }
