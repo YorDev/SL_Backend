@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace SL_Backend.Controllers
         // PUT: api/OrderItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutOrderItem(long id, OrderItem orderItem)
         {
             if (id != orderItem.Id)
@@ -76,6 +78,7 @@ namespace SL_Backend.Controllers
         // POST: api/OrderItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<OrderItem>> PostOrderItem(OrderItem orderItem)
         {
             _context.OrderItems.Add(orderItem);
@@ -86,6 +89,7 @@ namespace SL_Backend.Controllers
 
         // DELETE: api/OrderItems/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteOrderItem(long id)
         {
             var orderItem = await _context.OrderItems.FindAsync(id);

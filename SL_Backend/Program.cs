@@ -34,9 +34,10 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://*:{port}");
 
 builder.Services.AddAuthorization();
-
 
 var app = builder.Build();
 
@@ -46,6 +47,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

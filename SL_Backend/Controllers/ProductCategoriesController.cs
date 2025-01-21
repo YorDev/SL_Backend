@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace SL_Backend.Controllers
         // PUT: api/ProductCategories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutProductCategory(long id, ProductCategory productCategory)
         {
             if (id != productCategory.ProductId)
@@ -76,6 +78,7 @@ namespace SL_Backend.Controllers
         // POST: api/ProductCategories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ProductCategory>> PostProductCategory(ProductCategory productCategory)
         {
             _context.ProductCategories.Add(productCategory);
@@ -100,6 +103,7 @@ namespace SL_Backend.Controllers
 
         // DELETE: api/ProductCategories/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductCategory(long id)
         {
             var productCategory = await _context.ProductCategories.FindAsync(id);
